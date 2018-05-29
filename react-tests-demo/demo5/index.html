@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this.props.children</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+    
+        var NotesList = React.createClass({
+            render: function() {
+                return (
+                    <ol>
+                    {
+                        React.Children.map(this.props.children, function (child) {//this.props.children获取的是组件的所有子节点，另外this.props.children的值有三种可能，第一种：组件没有子节点，就是undefined;第二种，有一个子节点，返回的数据类型是object；第三种就是有多个子节点，返回的数据类型是array；利用react.children来处理this.props.children可以避免上述问题
+                        return <li>{child}</li>;
+                        })
+                    }
+                    </ol>
+                );
+            }
+        });
+
+        ReactDOM.render(
+            <NotesList>
+                <span>hello</span>
+                <span>world</span>
+            </NotesList>,
+            document.body
+        );
+    
+    </script>
+</body>
+</html>
